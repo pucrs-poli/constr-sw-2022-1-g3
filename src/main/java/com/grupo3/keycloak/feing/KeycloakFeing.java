@@ -1,8 +1,11 @@
 package com.grupo3.keycloak.feing;
 
+import com.grupo3.keycloak.dto.keycloak.LoginDTOResponse;
 import com.grupo3.keycloak.dto.keycloak.UpdatePasswordKeycloakDTO;
 import com.grupo3.keycloak.dto.keycloak.UserKeycloakDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +13,8 @@ import java.util.List;
 @FeignClient(value = "keycloak", url = "http://localhost:8080")
 public interface KeycloakFeing {
 
-    @PostMapping(value = "/auth/admin/realms/master/users")
-    void createUser(
+    @PostMapping(value = "/auth/admin/realms/master/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    Object createUser(
             @RequestBody UserKeycloakDTO createUserDTO,
             @RequestHeader String Authorization
     );
@@ -38,5 +41,16 @@ public interface KeycloakFeing {
     void updatePassword(
             @RequestHeader String Authorization,
             @RequestBody UpdatePasswordKeycloakDTO updatePasswordDTO,
-            @PathVariable  String id);
+            @PathVariable String id);
+
+    @PostMapping(value = "/auth/realms/master/protocol/openid-connect/token", headers = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    LoginDTOResponse login(
+            @RequestBody LinkedMultiValueMap<String, String> formParams
+    );
+
+    @PostMapping(value = "/auth/realms/master/protocol/openid-connect/token", headers = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    LoginDTOResponse relogin(
+            @RequestBody LinkedMultiValueMap<String, String> formParams
+    );
+
 }

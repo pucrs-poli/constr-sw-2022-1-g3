@@ -5,7 +5,9 @@ import com.grupo3.keycloak.dto.request.CreateUserDTO;
 import com.grupo3.keycloak.dto.request.UpdatePasswordRequestDTO;
 import com.grupo3.keycloak.useCases.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,17 +34,20 @@ public class UsersController {
     private DeleteUserUseCase deleteUserUseCase;
 
     @PostMapping
-    public void createUser(
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserKeycloakDTO createUser(
             @RequestBody CreateUserDTO createUserDTO,
             @RequestHeader String authorization
     ) {
-        createUserUseCase.execute(createUserDTO, authorization);
+        validateAuthorization(authorization);
+        return createUserUseCase.execute(createUserDTO, authorization);
     }
 
     @GetMapping
     public List<UserKeycloakDTO> getUsers(
             @RequestHeader String authorization
     ) {
+        validateAuthorization(authorization);
         return listUsersUseCase.execute(authorization);
     }
 
@@ -51,6 +56,7 @@ public class UsersController {
             @RequestHeader String authorization,
             @PathVariable String id
     ) {
+        validateAuthorization(authorization);
         return listSpecificUserUseCase.execute(authorization, id);
     }
 
@@ -60,6 +66,7 @@ public class UsersController {
             @RequestHeader String authorization,
             @PathVariable String id
     ) {
+        validateAuthorization(authorization);
         updateUserUseCase.execute(createUserDTO, authorization, id);
     }
 
@@ -69,16 +76,24 @@ public class UsersController {
             @RequestHeader String authorization,
             @PathVariable String id
     ) {
-        updatePasswordUseCase.execute(authorization,updatePasswordRequestDTO,id);
+        validateAuthorization(authorization);
+        updatePasswordUseCase.execute(authorization, updatePasswordRequestDTO, id);
     }
 
     @DeleteMapping(value = "{id}")
-    public void updatePassword(
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(
             @RequestHeader String authorization,
             @PathVariable String id
     ) {
-        deleteUserUseCase.execute(authorization,id);
+        validateAuthorization(authorization);
+        deleteUserUseCase.execute(authorization, id);
     }
 
+    private void validateAuthorization(String auth){
+        if(auth.isBlank()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.getReasonPhrase());
+        }
+    }
 
 }

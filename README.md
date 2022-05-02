@@ -12,4 +12,4 @@ O que:
     - GET /users/{id}: recuperação de um usuário - ok
     - PUT /users/{id}: atualização de um usuário - ok
     - PATCH /users/{id}: atualização da senha de um usuário - ok
-    - DELETE /users/{id}: exclusão lógica de um usuário
+    - DELETE /users/{id}: exclusão lógica de um usuário - ok
