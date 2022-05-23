@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  java:
+    image: 'backend:latest'
+    ports:
+      - "8001:8080"
+    container_name: backend
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - shared-net
+
+  mongo:
+    image: 'mongo'
+    ports:
+      - 27017:27017
+    container_name: mongo
+    volumes:
+      - /home/sinoed/data/db:/data/db
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  keycloak:
+    build: .
+    ports:
+      - "8080:8080"
+    image: "jboss/keycloak"
+    
+  app:
+    image: "test"
+    ports:
+      - "8001:8001"

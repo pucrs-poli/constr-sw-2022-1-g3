@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      host: mongo # mongo no docker-compose | localhost local
+      port: 27017
+      database: reservas
+
+server:
+  port: 8080
