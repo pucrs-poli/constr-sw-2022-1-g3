@@ -4,6 +4,9 @@ spring:
       host: mongo # mongo no docker-compose | localhost local
       port: 27017
       database: reservas
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   port: 8080
