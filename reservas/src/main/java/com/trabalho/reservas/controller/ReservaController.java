@@ -27,12 +27,12 @@ public class ReservaController {
     @PostMapping
     public void criarReserva(
             @RequestBody ReservaRequestDTO reservaRequestDTO
-            ){
+    ) {
         criarReservaUsecase.execute(reservaRequestDTO);
     }
 
     @GetMapping
-    public List<ReservaDTO> listarReservas(){
+    public List<ReservaDTO> listarReservas() {
         return listarReservasUsecase.execute();
     }
 
@@ -40,7 +40,7 @@ public class ReservaController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarReserva(
             @PathVariable String id
-    ){
+    ) {
         deletarReservaUsecase.execute(id);
     }
 
