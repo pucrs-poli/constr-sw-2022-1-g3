@@ -5,10 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+ @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ErroDTO {
-    private String error;
-    private Integer status;
+public class ErrorDTO {
+    private String message;
 }

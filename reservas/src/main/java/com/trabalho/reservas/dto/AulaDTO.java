@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class AulaDTO {
-    private String nome;
-    private String horario;
+    private String name;
+    private String schedule;
 }

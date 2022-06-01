@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Reserva {
+public class Reservation {
 
     @Id
     public String id;
 
-    private LocalDateTime data_inicio;
-    private LocalDateTime data_fim;
+    private LocalDateTime initial_date;
+    private LocalDateTime end_date;
     private Boolean enabled;
     private String idAula;
     private String idRecurso;

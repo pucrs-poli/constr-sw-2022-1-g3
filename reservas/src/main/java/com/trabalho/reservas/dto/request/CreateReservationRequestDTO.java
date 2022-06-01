@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservaRequestDTO {
+public class CreateReservationRequestDTO {
 
     private LocalDateTime data_inicio;
     private LocalDateTime data_fim;

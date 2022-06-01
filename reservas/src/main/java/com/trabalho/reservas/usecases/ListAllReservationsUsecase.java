@@ -4,7 +4,8 @@ import com.trabalho.reservas.dto.AulaDTO;
 import com.trabalho.reservas.dto.RecursoDTO;
 import com.trabalho.reservas.dto.ReservaDTO;
 import com.trabalho.reservas.dto.UsuarioDTO;
-import com.trabalho.reservas.entities.Reserva;
+import com.trabalho.reservas.dto.request.ListReservationRequestDTO;
+import com.trabalho.reservas.entities.Reservation;
 import com.trabalho.reservas.feing.AulaFeign;
 import com.trabalho.reservas.feing.RecursoFeign;
 import com.trabalho.reservas.feing.UsuarioFeign;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ListarReservasUsecase {
+public class ListAllReservationsUsecase {
 
     @Autowired
     private ReservaRepository reservaRepository;
@@ -31,18 +32,18 @@ public class ListarReservasUsecase {
     @Autowired
     private UsuarioFeign usuarioFeign;
 
-    public List<ReservaDTO> execute() {
-        List<Reserva> reservas = reservaRepository.findAll();
+    public List<ReservaDTO> execute(ListReservationRequestDTO listarReservasRequestDTO) {
+        List<Reservation> reservas = reservaRepository.findAll();
         List<ReservaDTO> reservasDTO = mapReservaToReservaDTO(reservas);
 
         return reservasDTO;
     }
 
-    private List<ReservaDTO> mapReservaToReservaDTO(List<Reserva> reservas) {
+    private List<ReservaDTO> mapReservaToReservaDTO(List<Reservation> reservas) {
         List<ReservaDTO> reservasDTO = new ArrayList<>();
 
 
-        for (Reserva reserva : reservas) {
+        for (Reservation reserva : reservas) {
             AulaDTO aulaDTO = aulaFeign.getAulas(reserva.getIdAula());
             RecursoDTO recursoDTO = recursoFeign.getRecurso(reserva.getIdRecurso());
             UsuarioDTO usuarioDTO = usuarioFeign.getUsuario(reserva.getIdUsuario());

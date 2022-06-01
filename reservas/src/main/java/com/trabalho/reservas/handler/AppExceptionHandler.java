@@ -1,8 +1,9 @@
 package com.trabalho.reservas.handler;
 
-import com.trabalho.reservas.dto.ErroDTO;
+import com.trabalho.reservas.dto.ErrorDTO;
 import com.trabalho.reservas.exceptions.AuthorizationException;
 import com.trabalho.reservas.exceptions.ErroNegocioException;
+import com.trabalho.reservas.exceptions.RecursoNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,33 +18,49 @@ public class AppExceptionHandler {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ErroNegocioException.class)
-    public ErroDTO handleBadRequest(HttpServletRequest httpServletRequest, Exception e){
-        ErroDTO erroDTO;
-        if(e instanceof ErroNegocioException) {
+    public ErrorDTO handleBadRequest(HttpServletRequest httpServletRequest, Exception e) {
+        ErrorDTO erroDTO;
+        if (e instanceof ErroNegocioException) {
             ErroNegocioException erroNegocioException = (ErroNegocioException) e;
 
-            erroDTO = new ErroDTO(erroNegocioException.getMessage(),HttpStatus.BAD_REQUEST.value());
+            erroDTO = new ErrorDTO(erroNegocioException.getMessage());
         } else {
-            erroDTO = new ErroDTO(
-                    e.getMessage(),
-                    HttpStatus.BAD_REQUEST.value()
+            erroDTO = new ErrorDTO(
+                    e.getMessage()
             );
         }
         return erroDTO;
     }
+
     @ResponseBody
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthorizationException.class)
-    public ErroDTO handleUnauthorized(HttpServletRequest httpServletRequest, Exception e){
-        ErroDTO erroDTO;
-        if(e instanceof ErroNegocioException) {
+    public ErrorDTO handleUnauthorized(HttpServletRequest httpServletRequest, Exception e) {
+        ErrorDTO erroDTO;
+        if (e instanceof ErroNegocioException) {
             ErroNegocioException erroNegocioException = (ErroNegocioException) e;
 
-            erroDTO = new ErroDTO(erroNegocioException.getMessage(),HttpStatus.UNAUTHORIZED.value());
+            erroDTO = new ErrorDTO(erroNegocioException.getMessage());
         } else {
-            erroDTO = new ErroDTO(
-                    e.getMessage(),
-                    HttpStatus.UNAUTHORIZED.value()
+            erroDTO = new ErrorDTO(
+                    e.getMessage()
+            );
+        }
+        return erroDTO;
+    }
+
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
+    public ErrorDTO handleNotFound(HttpServletRequest httpServletRequest, Exception e) {
+        ErrorDTO erroDTO;
+        if (e instanceof RecursoNaoEncontradoException) {
+            RecursoNaoEncontradoException erroNegocioException = (RecursoNaoEncontradoException) e;
+
+            erroDTO = new ErrorDTO(erroNegocioException.getMessage());
+        } else {
+            erroDTO = new ErrorDTO(
+                    e.getMessage()
             );
         }
         return erroDTO;

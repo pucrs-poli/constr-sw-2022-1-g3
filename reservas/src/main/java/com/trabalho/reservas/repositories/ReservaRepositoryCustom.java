@@ -1,10 +1,12 @@
 package com.trabalho.reservas.repositories;
 
-import com.trabalho.reservas.entities.Reserva;
+import com.trabalho.reservas.dto.request.ListReservationRequestDTO;
+import com.trabalho.reservas.entities.Reservation;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReservaRepositoryCustom {
-    List<Reserva> findReservaByIdRecursoAndDataInicio(String idRecurso, LocalDateTime localDateTime);
+    List<Reservation> findReservaByIdRecursoAndDataInicio(String idRecurso, LocalDateTime localDateTime);
+    List<Reservation> findAllReservasEnabledWithFilter(ListReservationRequestDTO listarReservasRequestDTO);
 }

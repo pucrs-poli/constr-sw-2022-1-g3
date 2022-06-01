@@ -11,7 +11,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthMiddleware());
+//        registry.addInterceptor(new AuthMiddleware()); //Adiciona o interceptor de request pra fazer autenticacao no keycloak
     }
 
 }
