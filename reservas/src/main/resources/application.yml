@@ -8,5 +8,11 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+reservations:
+  feign:
+    usersApi: https://628a3c025da6ddfd5d612a6c.mockapi.io
+    resourcesApi: https://628a3c025da6ddfd5d612a6c.mockapi.io
+    lessonsApi: https://628a3c025da6ddfd5d612a6c.mockapi.io
+
 server:
   port: 8081

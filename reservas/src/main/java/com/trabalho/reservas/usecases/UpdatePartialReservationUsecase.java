@@ -28,23 +28,23 @@ public class UpdatePartialReservationUsecase {
 
         Reservation reservation = reservationOptional.get();
 
-        if(nonNull(reservaRequestDTO.getStartDate())){
+        if (nonNull(reservaRequestDTO.getStartDate())) {
             reservation.setStartDate(reservaRequestDTO.getStartDate());
         }
 
-        if(nonNull(reservaRequestDTO.getEndDate())){
-            reservation.setEnd_date(reservaRequestDTO.getEndDate());
+        if (nonNull(reservaRequestDTO.getEndDate())) {
+            reservation.setEndDate(reservaRequestDTO.getEndDate());
         }
 
-        if(nonNull(reservaRequestDTO.getResourceId())){
+        if (nonNull(reservaRequestDTO.getResourceId())) {
             reservation.setResourceId(reservaRequestDTO.getResourceId());
         }
 
-        if(nonNull(reservaRequestDTO.getLessonId())){
+        if (nonNull(reservaRequestDTO.getLessonId())) {
             reservation.setLessonId(reservaRequestDTO.getLessonId());
         }
 
-        if(nonNull(reservaRequestDTO.getUserId())){
+        if (nonNull(reservaRequestDTO.getUserId())) {
             reservation.setUserId(reservaRequestDTO.getUserId());
         }
 

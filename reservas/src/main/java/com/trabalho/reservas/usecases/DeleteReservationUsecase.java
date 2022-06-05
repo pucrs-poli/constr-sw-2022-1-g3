@@ -17,13 +17,13 @@ public class DeleteReservationUsecase {
     public void execute(String id) {
         Optional<Reservation> reservaOptional = reservaRepository.findById(id);
 
-        if(reservaOptional.isPresent()) {
+        if (reservaOptional.isPresent()) {
             Reservation reserva = reservaOptional.get();
             reserva.setEnabled(false);
 
             reservaRepository.save(reserva);
         } else {
-            throw new RecursoNaoEncontradoException("Reserva nao encontrada");
+            throw new RecursoNaoEncontradoException("Reservation not found!");
         }
     }
 }

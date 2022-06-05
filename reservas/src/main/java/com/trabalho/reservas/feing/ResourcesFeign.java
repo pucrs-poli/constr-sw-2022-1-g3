@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(value = "recursoFeign", url = "https://628a3c025da6ddfd5d612a6c.mockapi.io")
+@FeignClient(value = "recursoFeign", url = "${reservations.feign.resourcesApi}")
 public interface ResourcesFeign {
 
     @GetMapping(value = "/resources/{id}")

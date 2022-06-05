@@ -14,7 +14,7 @@ public class AuthMiddleware extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String path = request.getRequestURI();
-        if(path.contains("swagger-ui")){
+        if (path.contains("swagger-ui")) {
             return true;
         }
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

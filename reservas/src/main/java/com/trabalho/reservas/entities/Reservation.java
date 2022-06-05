@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document("reservas")
+@Document("reservations")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,7 +18,7 @@ public class Reservation {
     public String id;
 
     private LocalDateTime startDate;
-    private LocalDateTime end_date;
+    private LocalDateTime endDate;
     private Boolean enabled;
     private String lessonId;
     private String resourceId;

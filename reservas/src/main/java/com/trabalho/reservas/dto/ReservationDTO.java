@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Builder
-public class ReservaDTO {
+public class ReservationDTO {
 
     private String id;
-    private LocalDateTime data_inicio;
-    private LocalDateTime data_fim;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Boolean enabled;
-    private UserDTO usuario;
-    private ResourceDTO recurso;
-    private LessonDTO aula;
+    private UserDTO user;
+    private ResourceDTO resource;
+    private LessonDTO lesson;
 }

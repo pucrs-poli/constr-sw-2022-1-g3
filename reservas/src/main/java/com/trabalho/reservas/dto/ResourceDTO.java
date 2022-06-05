@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResourceDTO {
 
-    private String nome;
-    private String descricao;
+    private String name;
+    private String description;
     private String id;
 
 }
