@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateReservationRequestDTO {
 
-    private LocalDateTime data_inicio;
-    private LocalDateTime data_fim;
-
-    private String idAula;
-    private String idRecurso;
-    private String idUsuario;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private Boolean enabled;
+    private String lessonId;
+    private String resourceId;
+    private String userId;
 }

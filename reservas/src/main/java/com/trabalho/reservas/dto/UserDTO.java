@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class AulaDTO {
-    private String name;
-    private String schedule;
+public class UserDTO {
+    private String nome;
 }

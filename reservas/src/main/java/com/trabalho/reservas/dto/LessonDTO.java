@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class RecursoDTO {
-
-    private String nome;
-    private String descricao;
-
+public class LessonDTO {
+    private String name;
+    private String schedule;
 }

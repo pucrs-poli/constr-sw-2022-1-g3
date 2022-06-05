@@ -17,11 +17,11 @@ public class Reservation {
     @Id
     public String id;
 
-    private LocalDateTime initial_date;
+    private LocalDateTime startDate;
     private LocalDateTime end_date;
     private Boolean enabled;
-    private String idAula;
-    private String idRecurso;
-    private String idUsuario;
+    private String lessonId;
+    private String resourceId;
+    private String userId;
 
 }

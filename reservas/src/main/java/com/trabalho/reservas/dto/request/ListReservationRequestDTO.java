@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class ListReservationRequestDTO {
-    private LocalDateTime initialDate;
+    private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String tipoRecurso; // como vai buscar pelo tipoRecurso se no banco tem somente o idRecurso?
-    private String idUsuario;
-    private String idRecurso;
+    private String resourcesType; // como vai buscar pelo tipoRecurso se no banco tem somente o idRecurso?
+    private String userId;
 }

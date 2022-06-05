@@ -1,15 +1,16 @@
 package com.trabalho.reservas.usecases;
 
-import com.trabalho.reservas.dto.AulaDTO;
-import com.trabalho.reservas.dto.RecursoDTO;
+import com.trabalho.reservas.dto.LessonDTO;
+import com.trabalho.reservas.dto.ResourceDTO;
 import com.trabalho.reservas.dto.ReservaDTO;
-import com.trabalho.reservas.dto.UsuarioDTO;
+import com.trabalho.reservas.dto.UserDTO;
 import com.trabalho.reservas.dto.request.ListReservationRequestDTO;
 import com.trabalho.reservas.entities.Reservation;
-import com.trabalho.reservas.feing.AulaFeign;
-import com.trabalho.reservas.feing.RecursoFeign;
-import com.trabalho.reservas.feing.UsuarioFeign;
-import com.trabalho.reservas.repositories.ReservaRepository;
+import com.trabalho.reservas.feing.LessonFeign;
+import com.trabalho.reservas.feing.ResourcesFeign;
+import com.trabalho.reservas.feing.UserFeign;
+import com.trabalho.reservas.repositories.ReservationRepository;
+import com.trabalho.reservas.repositories.ReservationRepositoryCustom;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,22 @@ import java.util.List;
 public class ListAllReservationsUsecase {
 
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReservationRepository reservaRepository;
 
     @Autowired
-    private AulaFeign aulaFeign;
+    private ReservationRepositoryCustom reservationRepositoryCustom;
 
     @Autowired
-    private RecursoFeign recursoFeign;
+    private LessonFeign aulaFeign;
 
     @Autowired
-    private UsuarioFeign usuarioFeign;
+    private ResourcesFeign recursoFeign;
+
+    @Autowired
+    private UserFeign usuarioFeign;
 
     public List<ReservaDTO> execute(ListReservationRequestDTO listarReservasRequestDTO) {
-        List<Reservation> reservas = reservaRepository.findAll();
+        List<Reservation> reservas = reservationRepositoryCustom.findAllReservasEnabledWithFilter(listarReservasRequestDTO);
         List<ReservaDTO> reservasDTO = mapReservaToReservaDTO(reservas);
 
         return reservasDTO;
@@ -44,9 +48,9 @@ public class ListAllReservationsUsecase {
 
 
         for (Reservation reserva : reservas) {
-            AulaDTO aulaDTO = aulaFeign.getAulas(reserva.getIdAula());
-            RecursoDTO recursoDTO = recursoFeign.getRecurso(reserva.getIdRecurso());
-            UsuarioDTO usuarioDTO = usuarioFeign.getUsuario(reserva.getIdUsuario());
+            LessonDTO aulaDTO = aulaFeign.getClasses(reserva.getLessonId());
+            ResourceDTO recursoDTO = recursoFeign.getResources(reserva.getResourceId());
+            UserDTO usuarioDTO = usuarioFeign.getUsuario(reserva.getUserId());
 
             ReservaDTO dto = new ReservaDTO();
             BeanUtils.copyProperties(reserva, dto);

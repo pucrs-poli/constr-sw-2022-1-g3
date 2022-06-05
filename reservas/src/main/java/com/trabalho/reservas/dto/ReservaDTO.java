@@ -17,7 +17,7 @@ public class ReservaDTO {
     private LocalDateTime data_inicio;
     private LocalDateTime data_fim;
     private Boolean enabled;
-    private UsuarioDTO usuario;
-    private RecursoDTO recurso;
-    private AulaDTO aula;
+    private UserDTO usuario;
+    private ResourceDTO recurso;
+    private LessonDTO aula;
 }

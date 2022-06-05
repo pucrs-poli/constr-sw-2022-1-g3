@@ -1,14 +1,13 @@
 package com.trabalho.reservas.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Builder
-public class UsuarioDTO {
-    private String nome;
+public class ResourceTypeDTO {
+    private String id;
+    private String category;
 }

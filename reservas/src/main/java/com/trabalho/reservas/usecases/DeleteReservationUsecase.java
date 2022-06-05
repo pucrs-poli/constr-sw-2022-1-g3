@@ -2,7 +2,7 @@ package com.trabalho.reservas.usecases;
 
 import com.trabalho.reservas.entities.Reservation;
 import com.trabalho.reservas.exceptions.RecursoNaoEncontradoException;
-import com.trabalho.reservas.repositories.ReservaRepository;
+import com.trabalho.reservas.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class DeleteReservationUsecase {
 
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReservationRepository reservaRepository;
 
     public void execute(String id) {
         Optional<Reservation> reservaOptional = reservaRepository.findById(id);

@@ -1,5 +1,11 @@
 FROM openjdk:11
-MAINTAINER baeldung.com
-COPY target/reservas-0.0.1-SNAPSHOT.jar app.jar
+
+ENV APP_NAME reservas
+
+COPY ./target/${APP_NAME}.jar /app/${APP_NAME}.jar
+
+WORKDIR /app
+
+CMD java -jar ${APP_NAME}.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
