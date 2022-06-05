@@ -17,8 +17,6 @@ public class SwaggerConfiguration {
 
     private static final String PATH_MAPPING = "/";
     private static final String PACKAGE_NAME = "com.trabalho.reservas";
-    private static final String AUTHORIZATION = "Authorization";
-
 
     @Bean
     public Docket api() {

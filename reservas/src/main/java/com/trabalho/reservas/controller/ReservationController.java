@@ -1,5 +1,6 @@
 package com.trabalho.reservas.controller;
 
+import com.trabalho.reservas.dto.ErrorDTO;
 import com.trabalho.reservas.dto.ReservationDTO;
 import com.trabalho.reservas.dto.request.CreateReservationRequestDTO;
 import com.trabalho.reservas.dto.request.ListReservationRequestDTO;
@@ -18,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
-@Api(value = "Reservations")
 public class ReservationController {
 
     @Autowired
@@ -41,6 +41,9 @@ public class ReservationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponses(
+            @ApiResponse(code = 400, message = "Bad Request")
+    )
     public Reservation createReservation(
             @RequestBody CreateReservationRequestDTO reservationRequestDTO
     ) {
@@ -49,9 +52,9 @@ public class ReservationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK")
-    })
+    @ApiResponses(
+            @ApiResponse(code = 400, message = "Bad Request", response = ErrorDTO.class)
+    )
     public List<ReservationDTO> listAllReservations(
             @RequestParam(required = false) LocalDateTime startDate,
             @RequestParam(required = false) LocalDateTime endDate,
@@ -67,43 +70,54 @@ public class ReservationController {
         return listAllReservationsUsecase.execute(listReservationRequestDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{reservationId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "NO CONTENT"),
-            @ApiResponse(code = 404, message = "NOT FOUND")
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found")
     })
-    @ApiOperation(value = "delete a reservation")
     public void deleteReservation(
-            @PathVariable String id
+            @PathVariable String reservationId
     ) {
-        deleteReservationUsecase.execute(id);
+        deleteReservationUsecase.execute(reservationId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
     public ReservationDTO listReservation(
-            @PathVariable String id
+            @PathVariable String reservationId
     ) {
-        return listReservationUsecase.execute(id);
+        return listReservationUsecase.execute(reservationId);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
     public void updateReservation(
-            @PathVariable String id,
+            @PathVariable String reservationId,
             @RequestBody CreateReservationRequestDTO reservaRequestDTO
     ) {
-        updateReservationUsecase.execute(id, reservaRequestDTO);
+        updateReservationUsecase.execute(reservationId, reservaRequestDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
     public void updatePartialReservation(
-            @PathVariable String id,
+            @PathVariable String reservationId,
             @RequestBody CreateReservationRequestDTO reservaRequestDTO
     ) {
-        updatePartialReservationUsecase.execute(id, reservaRequestDTO);
+        updatePartialReservationUsecase.execute(reservationId, reservaRequestDTO);
     }
 
 
