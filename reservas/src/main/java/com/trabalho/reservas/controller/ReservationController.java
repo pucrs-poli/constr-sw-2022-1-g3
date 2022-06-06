@@ -6,8 +6,6 @@ import com.trabalho.reservas.dto.request.CreateReservationRequestDTO;
 import com.trabalho.reservas.dto.request.ListReservationRequestDTO;
 import com.trabalho.reservas.entities.Reservation;
 import com.trabalho.reservas.usecases.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,9 @@ public class ReservationController {
 
     @Autowired
     private UpdatePartialReservationUsecase updatePartialReservationUsecase;
+
+    @Autowired
+    private DeleteReservationsByResourceUsecase deleteReservationsByResourceUsecase;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -120,5 +121,9 @@ public class ReservationController {
         updatePartialReservationUsecase.execute(reservationId, reservaRequestDTO);
     }
 
-
+    @DeleteMapping("{resourceId}/resources")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteReservations(@PathVariable String resourceId) {
+        deleteReservationsByResourceUsecase.execute(resourceId);
+    }
 }
