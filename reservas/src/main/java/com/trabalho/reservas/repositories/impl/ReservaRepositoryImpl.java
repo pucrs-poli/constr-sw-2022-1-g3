@@ -59,12 +59,9 @@ public class ReservaRepositoryImpl implements ReservationRepositoryCustom {
             criteria.and(RESOURCE_ID).in(resourcesIds);
         }
 
-        if (nonNull(listarReservasRequestDTO.getStartDate())) {
-            criteria.and(START_DATE).gte(listarReservasRequestDTO.getStartDate());
-        }
-
-        if (nonNull(listarReservasRequestDTO.getEndDate())) {
-            criteria.and(END_DATE).lte(listarReservasRequestDTO.getEndDate());
+        if (nonNull(listarReservasRequestDTO.getStartDate()) && nonNull(listarReservasRequestDTO.getEndDate())) {
+            criteria.and(START_DATE).lte(listarReservasRequestDTO.getEndDate());
+            criteria.and(END_DATE).gte(listarReservasRequestDTO.getStartDate());
         }
 
         final Query query = Query.query(criteria);

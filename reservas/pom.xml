@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>com.trabalho</groupId>
 	<artifactId>reservas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>reservas</name>
 	<description>Api pra realizar reservas de recursos computacionais</description>
 	<properties>
@@ -79,6 +78,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

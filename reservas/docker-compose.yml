@@ -1,14 +1,15 @@
-
-version: "3.9"
+version: "3"
 services:
 
   java:
+    image: 'backendreservations:latest'
+    ports:
+      - "8001:8080"
+    container_name: backendreservations
+    links:
+      - mongo
     depends_on:
       - mongo
-    build: .
-    container_name: "reservas"
-    ports:
-      - 8001:8080
     networks:
       - shared-net
 

@@ -9,6 +9,7 @@ import com.trabalho.reservas.usecases.*;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,8 +58,8 @@ public class ReservationController {
             @ApiResponse(code = 400, message = "Bad Request", response = ErrorDTO.class)
     )
     public List<ReservationDTO> listAllReservations(
-            @RequestParam(required = false) LocalDateTime startDate,
-            @RequestParam(required = false) LocalDateTime endDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime endDate,
             @RequestParam(required = false) String resourcesType,
             @RequestParam(required = false) String userId
     ) {
