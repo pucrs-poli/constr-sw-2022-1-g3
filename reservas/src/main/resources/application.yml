@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      host: localhost # mongo no docker-compose | localhost local
+      host: mongo # mongo no docker-compose | localhost local
       port: 27017
       database: reservas
   mvc:
@@ -15,4 +15,4 @@ reservations:
     lessonsApi: https://628a3c025da6ddfd5d612a6c.mockapi.io
 
 server:
-  port: 8081
+  port: 8001

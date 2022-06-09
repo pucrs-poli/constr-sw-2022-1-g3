@@ -1,11 +1,13 @@
-FROM openjdk:11
+FROM maven:3-jdk-11
 
 ENV APP_NAME reservas
 
-COPY ./target/${APP_NAME}.jar /app/${APP_NAME}.jar
+RUN mkdir /app
 
 WORKDIR /app
 
+COPY ./target/${APP_NAME}.jar /app/${APP_NAME}.jar
+
 CMD java -jar ${APP_NAME}.jar
 
-EXPOSE 8080
+EXPOSE 8001
